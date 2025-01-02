@@ -33,6 +33,7 @@ function App() {
         } else if (passwordInput.trim() === "") {
             setLoginDisplayInfo("Password field cannot be empty");
         } else {
+            setIsLoading(true);
             const response = await login(usernameInput, passwordInput);
             if (response?.successful === true) {
                 setToken(response?.token);
@@ -42,6 +43,7 @@ function App() {
             } else {
                 setLoginDisplayInfo(response?.displayMessage);
             }
+            setIsLoading(false);
         }
     }
 
@@ -116,7 +118,7 @@ function App() {
                             }`}
                         >
                             {isLoading ? (
-                                <div className="animate-spin rounded-full h-4 w-4 border-t-2"/>
+                                <div className="animate-spin rounded-full h-6 w-6 border-t-2"/>
                             ) : "Sign in"}
                         </button>
                     </div>
